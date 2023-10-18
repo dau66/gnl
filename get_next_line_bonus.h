@@ -6,7 +6,7 @@
 /*   By: ksho <ksho@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:51:32 by ksho              #+#    #+#             */
-/*   Updated: 2023/09/27 21:05:43 by ksho             ###   ########.fr       */
+/*   Updated: 2023/10/18 16:28:34 by ksho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 size_t	ft_strlen(char *str);
 char	*get_next_line(int fd);
-char	*ft_set_line(char *src);
+char	*ft_set_line(char *src, char *tmp);
 char	*ft_strchr(char *s, int c);
 char	*ft_move_line(char *start, char *tmp);
 char	*ft_strjoin(char *start, char *buff);

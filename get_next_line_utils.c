@@ -6,7 +6,7 @@
 /*   By: ksho <ksho@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 20:57:50 by ksho              #+#    #+#             */
-/*   Updated: 2023/09/29 22:44:18 by ksho             ###   ########.fr       */
+/*   Updated: 2023/10/18 16:24:27 by ksho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,6 @@ char	*ft_strncpy_modoki(char *s1, char *s2, size_t i)
 	size_t	j;
 
 	j = 0;
-	// if (!s1 || !s2)
-	// {
-	// 	free(s1);
-	// 	free(s2);
-	// 	return (NULL);
-	// }
 	while (s2[i + j])
 	{
 		s1[j] = s2[i + j];

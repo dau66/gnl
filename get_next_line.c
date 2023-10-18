@@ -6,7 +6,7 @@
 /*   By: ksho <ksho@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 20:57:44 by ksho              #+#    #+#             */
-/*   Updated: 2023/09/29 22:43:59 by ksho             ###   ########.fr       */
+/*   Updated: 2023/10/18 16:25:43 by ksho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ char	*ft_move_line(char *start, char *tmp)
 	i = 0;
 	while (start[i] && start[i] != '\n')
 		i++;
-	if (start[i] == '\0' || !tmp)
+	if ((start[i] == '\0' && i == 0) || !tmp)
 	{
 		free(start);
 		return (NULL);
 	}
 	i += (start[i] == '\n');
-	new_buff = (char *)malloc(sizeof(char) *(ft_strlen(start) - i + 1));
+	new_buff = (char *)malloc(sizeof(char) * (ft_strlen(start) - i + 1));
 	if (!new_buff)
 	{
 		free(start);
@@ -110,3 +110,18 @@ char	*get_next_line(int fd)
 		return (ft_all_free(start_str, tmp));
 	return (tmp);
 }
+
+// #include <stdio.h>
+// int main()
+// {
+// 	int fd;
+// 	char *str;
+
+// 	fd = open("test.txt", O_RDONLY);
+// 	while(str = get_next_line(fd))
+// 	{
+// 		printf("%s", str);
+// 		free(str);
+// 	}
+// 	printf("\n%s\n", str);
+// }

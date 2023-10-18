@@ -6,7 +6,7 @@
 /*   By: ksho <ksho@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:50:52 by ksho              #+#    #+#             */
-/*   Updated: 2023/09/27 21:04:37 by ksho             ###   ########.fr       */
+/*   Updated: 2023/10/18 16:27:46 by ksho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@ static size_t	ft_nl_until_count(char *str)
 	return (i);
 }
 
-char	*ft_set_line(char *start)
+char	*ft_set_line(char *start, char *tmp)
 {
 	size_t	i;
 	char	*line;
 
+	free(tmp);
 	if (!start || start[0] == '\0')
 		return (NULL);
 	i = ft_nl_until_count(start);
-	line = (char *)malloc(1 + i * sizeof(char));
+	line = (char *)malloc((1 + i) * sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -55,13 +56,13 @@ char	*ft_move_line(char *start, char *tmp)
 	i = 0;
 	while (start[i] && start[i] != '\n')
 		i++;
-	if (start[i] == '\0' || !tmp)
+	if ((start[i] == '\0' && i == 0) || !tmp)
 	{
 		free(start);
 		return (NULL);
 	}
 	i += (start[i] == '\n');
-	new_buff = (char *)malloc(1 + ft_strlen(start) - i);
+	new_buff = (char *)malloc(sizeof(char) * (ft_strlen(start) - i + 1));
 	if (!new_buff)
 	{
 		free(start);
@@ -75,15 +76,9 @@ char	*ft_move_line(char *start, char *tmp)
 static void	*ft_all_free(char *str, char *str1)
 {
 	if (str)
-	{
 		free(str);
-		str = NULL;
-	}
 	else if (str1)
-	{
 		free(str1);
-		str1 = NULL;
-	}
 	return (NULL);
 }
 
@@ -109,8 +104,9 @@ char	*get_next_line(int fd)
 		if (!start_str[fd])
 			return (ft_all_free(start_str[fd], tmp));
 	}
-	free(tmp);
-	tmp = ft_set_line(start_str[fd]);
+	tmp = ft_set_line(start_str[fd], tmp);
 	start_str[fd] = ft_move_line(start_str[fd], tmp);
+	if (!start_str[fd])
+		return (ft_all_free(start_str[fd], tmp));
 	return (tmp);
 }
